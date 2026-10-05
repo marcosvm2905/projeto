@@ -14,5 +14,18 @@ export function totalPorCategoria(despesas: Despesa[]): Record<Categoria, number
 }
 
 export function gerarMatrizGastos(despesas: Despesa[]): number[][] {
-  throw new Error("não implementado");
+  const matriz: number[][] = Array.from({ length: CATEGORIAS.length }, () =>
+    Array(12).fill(0)
+  );
+
+  for (const despesa of despesas) {
+    const linha = CATEGORIAS.indexOf(despesa.categoria);
+    const coluna = despesa.mes - 1;
+
+    if (linha !== -1 && coluna >= 0 && coluna < 12) {
+      matriz[linha][coluna] += despesa.valor;
+    }
+  }
+
+  return matriz;
 }
