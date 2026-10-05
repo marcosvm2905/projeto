@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { adicionarDespesa, despesasDaCategoria, totalGasto } from './despesas.js';
+import { adicionarDespesa, despesasDaCategoria, totalGasto, maiorDespesa } from './despesas.js';
 import { Despesa } from './tipos.js';
 
 describe('adicionarDespesa', () => {
@@ -74,5 +74,27 @@ describe('totalGasto', () => {
     const resultado = totalGasto(despesas);
 
     expect(resultado).toBe(0);
+  });
+});
+
+describe('maiorDespesa', () => {
+  it('deve retornar a despesa de maior valor', () => {
+    const despesas: Despesa[] = [
+      { id: '1', descricao: 'Café', valor: 10, categoria: 'alimentacao', mes: 1 },
+      { id: '2', descricao: 'Aluguel', valor: 1200, categoria: 'moradia', mes: 1 },
+      { id: '3', descricao: 'Cinema', valor: 40, categoria: 'lazer', mes: 1 }
+    ];
+
+    const resultado = maiorDespesa(despesas);
+
+    expect(resultado).toEqual(despesas[1]);
+  });
+
+  it('deve retornar null se a lista de despesas estiver vazia', () => {
+    const despesas: Despesa[] = [];
+
+    const resultado = maiorDespesa(despesas);
+
+    expect(resultado).toBeNull();
   });
 });

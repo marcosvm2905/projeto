@@ -22,3 +22,7 @@ export function despesasDaCategoria(
 export function totalGasto(despesas: Despesa[]): number {
   return despesas.reduce((acc, despesa) => acc + despesa.valor, 0);
 }
+
+export function maiorDespesa(despesas: Despesa[]): Despesa | null {
+  throw new Error("não implementado");
+}
