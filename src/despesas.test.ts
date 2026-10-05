@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { adicionarDespesa } from './despesas.js';
+import { adicionarDespesa, despesasDaCategoria } from './despesas.js';
 import { Despesa } from './tipos.js';
 
 describe('adicionarDespesa', () => {
@@ -28,5 +28,30 @@ describe('adicionarDespesa', () => {
     const despesaMesInvalido: Despesa = { id: '1', descricao: 'Teste', valor: 50, categoria: 'lazer', mes: 13 };
 
     expect(() => adicionarDespesa(despesasIniciais, despesaMesInvalido)).toThrow();
+  });
+});
+
+describe('despesasDaCategoria', () => {
+  it('deve retornar apenas as despesas da categoria informada', () => {
+    const despesas: Despesa[] = [
+      { id: '1', descricao: 'Almoço', valor: 30, categoria: 'alimentacao', mes: 2 },
+      { id: '2', descricao: 'Busã', valor: 5, categoria: 'transporte', mes: 2 },
+      { id: '3', descricao: 'Janta', valor: 45, categoria: 'alimentacao', mes: 2 }
+    ];
+
+    const resultado = despesasDaCategoria(despesas, 'alimentacao');
+
+    expect(resultado).toHaveLength(2);
+    expect(resultado.every(d => d.categoria === 'alimentacao')).toBe(true);
+  });
+
+  it('deve retornar um array vazio se não houver despesas da categoria', () => {
+    const despesas: Despesa[] = [
+      { id: '1', descricao: 'Almoço', valor: 30, categoria: 'alimentacao', mes: 2 }
+    ];
+
+    const resultado = despesasDaCategoria(despesas, 'moradia');
+
+    expect(resultado).toEqual([]);
   });
 });

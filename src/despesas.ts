@@ -1,4 +1,4 @@
-import { Despesa } from './tipos.js';
+import { Despesa, Categoria } from './tipos.js';
 
 export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] {
   if (nova.valor <= 0) {
@@ -10,4 +10,8 @@ export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] 
   }
 
   return [...despesas, nova];
+}
+
+export function despesasDaCategoria(despesas: Despesa[], categoria: Categoria): Despesa[] {
+  throw new Error("não implementado");
 }
