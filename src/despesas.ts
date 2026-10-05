@@ -18,3 +18,7 @@ export function despesasDaCategoria(
 ): Despesa[] {
   return despesas.filter((d) => d.categoria === categoria);
 }
+
+export function totalGasto(despesas: Despesa[]): number {
+  throw new Error("não implementado");
+}
